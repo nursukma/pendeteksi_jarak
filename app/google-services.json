@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "725846235895",
+    "firebase_url": "https://project-pkm-318913-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "project-pkm-318913",
+    "storage_bucket": "project-pkm-318913.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725846235895:android:e7ce8370e5a1f9b0c8d1f2",
+        "android_client_info": {
+          "package_name": "com.example.pendeteksi_jarak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725846235895-c27gigu91kgk9d2qmjdga3gjlvb800rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj2DuPUVFHXS28xBy650dSFHLna8q7Ei8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725846235895-c27gigu91kgk9d2qmjdga3gjlvb800rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,2 @@
+rootProject.name = "pendeteksi_jarak"
+include ':app'
