@@ -1,10 +1,18 @@
 package com.example.pendeteksi_jarak.Model;
 
 public class DriverInfoModel {
-    private String firstName, lastName, phoneNumber;
+    private String firstName, lastName, phoneNumber, avatar;
     private double rating;
 
     public DriverInfoModel() {
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getFirstName() {
