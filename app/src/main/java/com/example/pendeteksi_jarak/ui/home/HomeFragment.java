@@ -14,10 +14,15 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -159,6 +164,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, IFireb
     IFirebaseFailedListener iFirebaseFailedListener;
 
     private String cityName;
+    private Ringtone r;
+    private Vibrator v;
 
     //Online system
     DatabaseReference onlineRef, currentUserRef, driversLocationRef;
@@ -229,6 +236,23 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, IFireb
 
         iFirebaseDriverInfoListener = this;
         iFirebaseFailedListener = this;
+
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
+        if(notification == null){
+            // alert is null, using backup
+            notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            // I can't see this ever being null (as always have a default notification)
+            // but just incase
+            if(notification == null) {
+                // alert backup is null, using 2nd backup
+                notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            }
+        }
+
+        r = RingtoneManager.getRingtone(this.getContext(), notification);
+        v = (Vibrator) this.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -445,6 +469,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, IFireb
 
                                     if(inijarak < 100){
                                         Snackbar.make(getView(),"Jarakmu : "+inijarak+" m", Snackbar.LENGTH_LONG).show();
+                                        if(inijarak <= 5){
+                                            r.play();
+                                            getarVibrator();
+                                        }
                                     }else {
                                         Snackbar.make(getView(),"gagal dengan jarak : "+inijarak+" m", Snackbar.LENGTH_LONG).show();
                                     }
@@ -869,5 +897,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, IFireb
 
                     }
                 });
+    }
+
+    public void getarVibrator(){
+        if (Build.VERSION.SDK_INT >= 26) {
+            v.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+        }else {
+            v.vibrate(200);
+        }
     }
 }
